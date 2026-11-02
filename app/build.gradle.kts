@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -22,8 +23,7 @@ android {
     buildTypes {
         release {
             optimization {
-                enable = true
-                packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
+                enable = false
             }
         }
     }
@@ -37,6 +37,31 @@ android {
 }
 
 dependencies {
+
+    // Room Database
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // Navigation Compose
+    implementation(libs.androidx.navigation.compose)
+
+    // ViewModel Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    // Argon2
+    implementation(libs.argon2)
+
+    // DataStore
+    implementation(libs.androidx.datastore.preferences)
+
+    // Biometric
+    implementation(libs.androidx.biometric)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
